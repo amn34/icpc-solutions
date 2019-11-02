@@ -1,7 +1,10 @@
-//Problem number 8070 on ICPC Live Archive 
+//Problem number 8069 on ICPC Live Archive 
 
-//import java.io.BufferedReader; 
-//import java.io.InputStreamReader;
+import java.io.BufferedReader; 
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Stack;
 import java.util.StringTokenizer;
@@ -10,34 +13,62 @@ import java.io.IOException;
 
 class Main{
 
-	   static void game(int numChild, StringTokenizer st){  
-		   int total = 0;
-		   Stack<Integer> stack =  new Stack<Integer>();
+	   static void encrypt(String line){ 
+		   Map<Character, Integer> map = new HashMap<Character, Integer>(){{
+		        put('A', 0);
+		        put('B', 1);
+		        put('C', 2);
+		        put('D', 3);
+		        put('E', 4);
+		        put('F', 5);
+		        put('G', 6);
+		        put('H', 7);
+		        put('I', 8);
+		        put('J', 9);
+		        put('K', 10);
+		        put('L', 11);
+		        put('M', 12);
+		        put('N', 13);
+		        put('O', 14);
+		        put('P', 15);
+		        put('Q', 16);
+		        put('R', 17);
+		        put('S', 18);
+		        put('T', 19);
+		        put('U', 20);
+		        put('V', 21);
+		        put('W', 22);
+		        put('X', 23);
+		        put('Y', 24);
+		        put('Z', 25);
+		      }};
+		      char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 		      
-		   while (st.hasMoreTokens()) {
-			   try {
-				   stack.push(Integer.parseInt(st.nextToken()));
-			   } catch(NumberFormatException e) {
-				   int num = Integer.parseInt(st.nextToken());
-				   for(int i = 0; i < num; i++) {
-					   stack.pop();
-				   }
-			   }
-		   }
+		      char[] s1 = line.substring(0, (line.length()/2)).toCharArray();
+		      char[] s2 = line.substring((line.length()/2), line.length()).toCharArray();
+		      int rotationS1 = 0;
+		      int rotationS2 = 0;
+		      for(char s: s1) {
+		    	rotationS1 = rotationS1 + map.get(s);  
+		      }
+		      
+		      for(char s: s2) {
+		    	rotationS2 = rotationS2 + map.get(s);  
+		      }
+		      
+		      for(int i = 0; i < s1.length; i++) {
+		    	  s1[i] = alphabet[(map.get(s1[i]) + rotationS1) % 26];
+		      }
+		      for(int i = 0; i < s2.length; i++) {
+		    	  s2[i] = alphabet[(map.get(s2[i]) + rotationS2) % 26];
+		      }
+		      for(int i = 0; i < s1.length; i++) {
+		    	  int total = map.get(s1[i]) + map.get(s2[i]);
+		    	  s1[i] = alphabet[total % 26];
+
+		      }
+		      System.out.println(s1);
 		   
-		   while(!stack.isEmpty()) {
-			   total = total + stack.pop();
-		   }
-		   
-		   if(total == 0 || total % numChild == 0) {
-			   System.out.println(0);
-		   }
-		   else if(total > 0) {
-			   System.out.println(total % numChild);
-		   } else {
-			   total = total * -1;	   
-			   System.out.println(numChild - (total%numChild));
-		   }
 	   }
  
       
@@ -45,22 +76,17 @@ class Main{
 	   
       Main myWork = new Main();
       myWork.begin();
+//	   String yes = "EWPGAJRB";
+//	   encrypt(yes);
    }
     
     void begin() throws IOException{
-    	Scanner in = new Scanner(System.in);
-    	StringTokenizer st;
-    	int numChild;
-    	String line; 
+    	BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+    	String line;
 
-    	while(in.hasNextLine()) {
-        	numChild = in.nextInt();
-        	in.nextLine();
-        	line = in.nextLine();
-        	st = new StringTokenizer(line);   	
-    		game(numChild, st);
+    	while((line = bi.readLine()) != null) {   	
+    		encrypt(line);
         }
-    	in.close();
     }//end method
 }//end class
 
