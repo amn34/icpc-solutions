@@ -1,0 +1,67 @@
+//Problem number 8070 on ICPC Live Archive 
+
+//import java.io.BufferedReader; 
+//import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.StringTokenizer;
+import java.io.IOException; 
+
+
+class Main{
+
+	   static void game(int numChild, StringTokenizer st){  
+		   int total = 0;
+		   Stack<Integer> stack =  new Stack<Integer>();
+		      
+		   while (st.hasMoreTokens()) {
+			   try {
+				   stack.push(Integer.parseInt(st.nextToken()));
+			   } catch(NumberFormatException e) {
+				   int num = Integer.parseInt(st.nextToken());
+				   for(int i = 0; i < num; i++) {
+					   stack.pop();
+				   }
+			   }
+		   }
+		   
+		   while(!stack.isEmpty()) {
+			   total = total + stack.pop();
+		   }
+		   
+		   if(total == 0 || total % numChild == 0) {
+			   System.out.println(0);
+		   }
+		   else if(total > 0) {
+			   System.out.println(total % numChild);
+		   } else {
+			   total = total * -1;	   
+			   System.out.println(numChild - (total%numChild));
+		   }
+	   }
+ 
+      
+   public static void main(String[] args) throws IOException { 
+	   
+      Main myWork = new Main();
+      myWork.begin();
+   }
+    
+    void begin() throws IOException{
+    	Scanner in = new Scanner(System.in);
+    	StringTokenizer st;
+    	int numChild;
+    	String line; 
+
+    	while(in.hasNextLine()) {
+        	numChild = in.nextInt();
+        	in.nextLine();
+        	line = in.nextLine();
+        	st = new StringTokenizer(line);   	
+    		game(numChild, st);
+        }
+    	in.close();
+    }//end method
+}//end class
+
+
