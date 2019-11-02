@@ -1,0 +1,50 @@
+
+import java.io.BufferedReader; 
+import java.io.InputStreamReader; 
+import java.util.StringTokenizer;
+import java.io.IOException; 
+
+
+class Main{
+
+   static void fizzBuzz(int first, int second, int check){  
+	    
+      for(int i = 1; i <= check; i++) {
+    	  if(i % first == 0) {
+    		  if(i % second == 0) {
+    			  System.out.println("FizzBuzz");
+    		  } else {
+    			  System.out.println("Fizz");
+    		  }
+    	  }
+    	  else if(i % second == 0) {
+    		  System.out.println("Buzz"); 
+    	  }
+    	  else {
+    		  System.out.println(i);
+    	  }
+      }
+   }
+ 
+      
+   public static void main(String[] args) throws IOException { 
+      Main myWork = new Main();
+      myWork.begin();
+   
+   }
+    
+    void begin() throws IOException{
+    	BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+    	String line = bi.readLine();
+    	StringTokenizer st;
+    	while((line = bi.readLine()) != null) {
+    		st = new StringTokenizer(line);
+    		int first = Integer.parseInt(st.nextToken()); 
+    		int second = Integer.parseInt(st.nextToken());
+    		int check = Integer.parseInt(st.nextToken());
+    		fizzBuzz(first, second, check);
+        }
+    }//end method
+}//end class
+
+
