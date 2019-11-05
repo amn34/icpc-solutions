@@ -1,0 +1,84 @@
+
+//Problem number 5941 on ICPC Live Archive 
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.io.IOException; 
+
+
+class Main{
+
+	   static void posts(Map<String, Integer> mapX, Map<String, Integer> mapY){
+		   int max = 0; 
+		   for(int num: mapX.values()) {
+			   if(num > max) {
+				   max = num;
+			   }
+		   }
+		   for(int num: mapY.values()) {
+			   if(num > max) {
+				   max = num;
+			   }
+		   }
+		   System.out.println(max);
+
+
+	   }
+	   
+	   static void putInMap(Map<String, Integer> map, String coordinate) {
+		   if(map.containsKey(coordinate)) {
+			   map.put(coordinate, map.get(coordinate)+1);
+		   } else {
+			   map.put(coordinate, 1);
+		   }
+	   }
+ 
+      
+   public static void main(String[] args) throws IOException { 
+	   
+      Main myWork = new Main();
+      myWork.begin();
+//	   Map<String, Integer> testX = new HashMap<String, Integer>();
+//	   Map<String, Integer> testY = new HashMap<String, Integer>();
+//	   String[] xCor = {"-8", "-2", "4", "9", "-8", "-3", "-8", "-1", "1", "6", "11", "2", "4", "9", "-5", "3"};
+//	   String[] yCor = {"9", "8", "7", "9", "5", "5", "1", "2", "5", "5", "5", "3", "1", "2", "0", "-2"};
+//	   for(int i = 0; i < xCor.length; i++) {
+//		   putInMap(testX, xCor[i]);
+//		   putInMap(testY, yCor[i]);
+//	   }
+//	   posts(testX,testY);
+	   	
+	   
+	   
+
+   }
+    
+    void begin() throws IOException{
+//    	BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+    	
+    	
+    	Scanner in = new Scanner(System.in);
+    	String line; 
+    	String[] lineArray;
+
+    	while(in.hasNextLine()) {
+        	Map<String, Integer> mapX = new HashMap<String, Integer>();
+        	Map<String, Integer> mapY = new HashMap<String, Integer>();
+        	int num = in.nextInt();
+        	in.nextLine();
+    		for(int i = 0; i < num; i++) {
+    			line = in.nextLine();
+    			System.out.println(line);
+    			lineArray = line.split(" ");
+     			putInMap(mapX, lineArray[0]);
+    			putInMap(mapY, lineArray[1]);    			
+    		}
+    		posts(mapX, mapY);
+    		in.nextLine();
+        }
+    	in.close();  	
+    	
+    }//end method
+}//end class
+
