@@ -1,0 +1,59 @@
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import java.io.IOException; 
+
+
+class Main{
+
+   static void ascii(String website, ArrayList<Integer> asciiList){  
+	      int total = 0;
+	      for(char c: website.toCharArray()){
+	         total = total + (int) c; 
+	      }
+	      asciiList.add(total);
+   }
+ 
+      
+   public static void main(String[] args) throws IOException { 
+      Main myWork = new Main();
+      myWork.begin();
+   
+   }
+    
+    void begin() throws IOException{
+    	BufferedReader bi = new BufferedReader(new InputStreamReader(System.in));
+    	//BufferedReader bi = new BufferedReader(new FileReader("test.txt"));
+    	
+    	StringTokenizer st;
+    	String line; 
+    	ArrayList<Integer> asciiList = new ArrayList<Integer>();
+    	int caseNum = 1;
+    	while((line = bi.readLine()) != null) {
+    		int numLines = Integer.parseInt(line);
+    		for(int i = 0; i < numLines; i++) {
+    			String website = bi.readLine();
+    			ascii(website, asciiList);
+    		}
+        	int max = asciiList.get(0);
+        	for(int ascii: asciiList) {
+        		if(ascii > max) {
+        			max  = ascii;
+        		}
+        	}
+        	asciiList.clear();
+        	System.out.println("Case " + caseNum + ": " + max);
+        	caseNum++;
+    	}
+
+    	bi.close();
+    	//max algorithm
+    	
+    	
+    }//end method
+}//end class
+
+
